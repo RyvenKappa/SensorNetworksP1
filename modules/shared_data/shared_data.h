@@ -26,6 +26,27 @@ typedef struct{
 extern gps_data_t gps_data;
 
 extern Mutex gps_mutex;
+
+/**
+* 
+* TODO comentarlo
+*
+*/
+typedef struct{
+    float x_acc;
+    float y_acc;
+    float z_acc;
+    float temp;
+    float hum;
+    uint16_t clear;
+    uint16_t red;
+    uint16_t green;
+    uint16_t blue;
+}i2c_data_t;
+
+extern i2c_data_t i2c_data;
+
+extern Mutex i2c_mutex;
 #endif
 
 
