@@ -1,6 +1,6 @@
 #include "gps.h"
 #include <cstdint>
-Thread gps_thread(osPriorityNormal,2048,nullptr,"GPSThread");
+Thread gps_thread(osPriorityNormal,1024,nullptr,"GPSThread");
 
 static char buffer[83];
 static BufferedSerial serial(NC,GPS_RX,9600);
@@ -64,7 +64,6 @@ static void parse_gps_msg(){
 */
 static void gps_read_data(){
     while (true) {
-        printf("Me he levantado\n");
         found_gps_msg = false;
         found_gps_date = false;
         serial.enable_input(true);
