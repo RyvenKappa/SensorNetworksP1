@@ -84,6 +84,11 @@ static void gps_read_data(){
 
 void gps_init(){
     //TODO initialize the gps data
+    frame_data_mutex.lock();
+    frame_data.longitude = 0.0;
+    frame_data.latitude = 0.0;
+    frame_data.altitude = 0;
+    frame_data_mutex.unlock();
     serial.enable_input(false);
     gps_thread.start(&gps_read_data);
 }
