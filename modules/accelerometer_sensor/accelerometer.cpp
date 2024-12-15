@@ -20,11 +20,11 @@ static void read_acc_x_y_z(){
     int16_t x_acc = (int16_t(data[0]<<8 | data[1]))>>2;
     int16_t y_acc = (int16_t(data[2]<<8 | data[3]))>>2;
     int16_t z_acc = (int16_t(data[4]<<8 | data[5]))>>2;
-    i2c_mutex.lock();
-    i2c_data.x_acc = ((float)x_acc)*9.80665/ACCELEROMETER_8G;
-    i2c_data.y_acc = ((float)y_acc)*9.80665/ACCELEROMETER_8G;
-    i2c_data.z_acc = ((float)z_acc)*9.80665/ACCELEROMETER_8G;
-    i2c_mutex.unlock();
+    frame_data_mutex.lock();
+    frame_data.x_acc = x_acc;
+    frame_data.y_acc = y_acc;
+    frame_data.z_acc = z_acc;
+    frame_data_mutex.unlock();
 }
 
 void clear_acc_interrupt(){
