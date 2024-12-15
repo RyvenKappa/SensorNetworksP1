@@ -28,6 +28,16 @@
 #include "trace_helper.h"
 #include "lora_radio_helper.h"
 
+// Application new modules
+#include "./modules/shared_data/shared_data.h"
+#include "./modules/gps_sensor/gps.h"
+#include "./modules/i2c/i2c_interface.h"
+#include "./modules/moisture_sensor/moisture_sensor.h"
+#include "./modules/brightness_sensor/brightness_sensor.h"
+
+frame_data_t frame_data;
+Mutex frame_data_mutex;
+
 using namespace events;
 using namespace std::chrono_literals;
 
@@ -177,6 +187,10 @@ int main(void)
 
     printf("\r\n Connection - In Progress ...\r\n");
 
+
+    gps_init();
+    i2c_thread_init();
+
     // make your event queue dispatching events forever
     ev_queue.dispatch_forever();
 
@@ -188,26 +202,14 @@ int main(void)
  */
 static void send_message()
 {
-    uint16_t packet_len;
+    
     int16_t retcode;
-    int32_t sensor_value;
-
-    if (ds1820.begin()) {
-        ds1820.startConversion();
-        sensor_value = ds1820.read();
-        printf("\r\n Dummy Sensor Value = %d \r\n", sensor_value);
-        ds1820.startConversion();
-    } else {
-        printf("\r\n No sensor found \r\n");
-        return;
-    }
-
-    packet_len = snprintf((char *) tx_buffer, sizeof(tx_buffer),
-                          "Dummy Sensor Value is %d", sensor_value);
-
-    retcode = lorawan.send(MBED_CONF_LORA_APP_PORT, tx_buffer, packet_len,
+    frame_data_mutex.lock();
+    frame_data.header = 0x10;
+    frame_data.gps_conn = 0x01;
+    retcode = lorawan.send(MBED_CONF_LORA_APP_PORT, (uint8_t *) &frame_data, sizeof(frame_data),
                            MSG_UNCONFIRMED_FLAG);
-
+    frame_data_mutex.unlock();
     if (retcode < 0) {
         retcode == LORAWAN_STATUS_WOULD_BLOCK ? printf("send - WOULD BLOCK\r\n")
         : printf("\r\n send() - Error code %d \r\n", retcode);
