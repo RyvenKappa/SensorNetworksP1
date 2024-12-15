@@ -7,9 +7,6 @@
 
 Thread i2c_thread(osPriorityNormal,512,nullptr,"I2CThread");
 
-Mutex i2c_mutex;
-i2c_data_t i2c_data;
-
 I2C i2c_bus(I2C_SDA_PIN,I2C_SCL_PIN);
 
 /**
@@ -27,26 +24,16 @@ static void i2c_read_sensors(){
 
 void i2c_thread_init(){
     frame_data_mutex.lock();
-    frame_data.x_acc = 0.0;
-    frame_data.y_acc = 0.0;
-    frame_data.z_acc = 0.0;
-    frame_data.temp = 0.0;
-    frame_data.hum = 0.0;
-    frame_data.clear = 0;
-    frame_data.red = 0;
-    frame_data.green = 0;
-    frame_data.blue = 0;
+    frame_data.x_acc = -9;
+    frame_data.y_acc = 2;
+    frame_data.z_acc = 1;
+    frame_data.temp = 20;
+    frame_data.hum = 15;
+    frame_data.clear = 200;
+    frame_data.red = 100;
+    frame_data.green = 50;
+    frame_data.blue = 50;
     frame_data_mutex.unlock();
-    i2c_mutex.lock();
-    i2c_data.x_acc = 0.0;
-    i2c_data.y_acc = 0.0;
-    i2c_data.temp = 20.0;
-    i2c_data.hum = 20.0;
-    i2c_data.clear = 0;
-    i2c_data.red = 0;
-    i2c_data.green = 0;
-    i2c_data.blue = 0;
-    i2c_mutex.unlock();
     accelerometer_sensor_init();
     color_sensor_init();
     osStatus codigo = i2c_thread.start(&i2c_read_sensors);

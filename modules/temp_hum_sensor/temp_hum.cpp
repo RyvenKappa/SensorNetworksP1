@@ -17,9 +17,9 @@ static void converted_reading(){
     //Humidity
     i2c_bus.read(TH_SENSOR_SLAVE_ADDRESS<<1,buff,2);
     //conversion
-    i2c_mutex.lock();
-    i2c_data.hum = ((125.0*(buff[0]<<8 | buff[1]))/65536.0)-6;
-    i2c_mutex.unlock();
+    frame_data_mutex.lock();
+    frame_data.hum = (buff[0]<<8 | buff[1]);
+    frame_data_mutex.unlock();
 
 
     //Obtain last temperature measurement
@@ -27,9 +27,9 @@ static void converted_reading(){
     i2c_bus.write(TH_SENSOR_SLAVE_ADDRESS<<1,&cmd,1);
     i2c_bus.read(TH_SENSOR_SLAVE_ADDRESS<<1,buff,2);
     //Conversion
-    i2c_mutex.lock();
-    i2c_data.temp = (175.72*(buff[0]<<8 | buff[1])/65536.0)-46.85;
-    i2c_mutex.unlock();
+    frame_data_mutex.lock();
+    frame_data.temp = (buff[0]<<8 | buff[1]);
+    frame_data_mutex.unlock();
 }
 
 /**

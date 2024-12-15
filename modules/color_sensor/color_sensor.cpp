@@ -14,12 +14,12 @@ static char data[8];
 * Static function for measurement processing
 */
 static void measurement_process(){
-    i2c_mutex.lock();
-    i2c_data.clear = data[1]<<8 | data[0];
-    i2c_data.red = data[3]<<8 | data[2];
-    i2c_data.green = (data[5]<<8 | data[4]) + i2c_data.red*0.15;
-    i2c_data.blue = (data[7]<<8 | data[6]) + i2c_data.red*0.25;
-    i2c_mutex.unlock();
+    frame_data_mutex.lock();
+    frame_data.clear = data[1]<<8 | data[0];
+    frame_data.red = data[3]<<8 | data[2];
+    frame_data.green = (data[5]<<8 | data[4]) + frame_data.red*0.15;
+    frame_data.blue = (data[7]<<8 | data[6]) + frame_data.red*0.25;
+    frame_data_mutex.unlock();
 }
 
 void color_sensor_read(){
