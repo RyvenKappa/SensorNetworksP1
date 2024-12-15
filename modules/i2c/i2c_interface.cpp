@@ -26,6 +26,17 @@ static void i2c_read_sensors(){
 
 
 void i2c_thread_init(){
+    frame_data_mutex.lock();
+    frame_data.x_acc = 0.0;
+    frame_data.y_acc = 0.0;
+    frame_data.z_acc = 0.0;
+    frame_data.temp = 0.0;
+    frame_data.hum = 0.0;
+    frame_data.clear = 0;
+    frame_data.red = 0;
+    frame_data.green = 0;
+    frame_data.blue = 0;
+    frame_data_mutex.unlock();
     i2c_mutex.lock();
     i2c_data.x_acc = 0.0;
     i2c_data.y_acc = 0.0;
