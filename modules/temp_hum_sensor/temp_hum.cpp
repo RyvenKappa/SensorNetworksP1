@@ -18,7 +18,7 @@ static void converted_reading(){
     i2c_bus.read(TH_SENSOR_SLAVE_ADDRESS<<1,buff,2);
     //conversion
     frame_data_mutex.lock();
-    frame_data.hum = (buff[0]<<8 | buff[1]);
+    frame_data.hum = (uint16_t)(((125.0*(buff[0]<<8 | buff[1])/65536.0)-6)*10);
     frame_data_mutex.unlock();
 
 

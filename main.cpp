@@ -202,11 +202,13 @@ int main(void)
  */
 static void send_message()
 {
-    
     int16_t retcode;
     frame_data_mutex.lock();
-    frame_data.header = 0x10;
-    frame_data.gps_conn = 0x01;
+    frame_data.header = 0x10;//TODO definir el header
+    frame_data.moisture = (int)(read_moisture_sensor_data()*10);
+    frame_data.light = (int)(read_brightness_sensor_data()*10);
+    printf("Nuestro valor de salida es: %d\n",sizeof(frame_data));
+    
     retcode = lorawan.send(MBED_CONF_LORA_APP_PORT, (uint8_t *) &frame_data, sizeof(frame_data),
                            MSG_UNCONFIRMED_FLAG);
     frame_data_mutex.unlock();
