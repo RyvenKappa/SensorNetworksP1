@@ -17,13 +17,10 @@ static void read_acc_x_y_z(){
     cmd[0] = ACCELEROMETER_X_MSB;
     i2c_bus.write(ACCELEROMETER_SLAVE_ADDRESS<<1,cmd,1,true);
     i2c_bus.read(ACCELEROMETER_SLAVE_ADDRESS<<1,data,6);
-    int16_t x_acc = (int16_t(data[0]<<8 | data[1]))>>2;
-    int16_t y_acc = (int16_t(data[2]<<8 | data[3]))>>2;
-    int16_t z_acc = (int16_t(data[4]<<8 | data[5]))>>2;
     frame_data_mutex.lock();
-    frame_data.x_acc = x_acc;
-    frame_data.y_acc = y_acc;
-    frame_data.z_acc = z_acc;
+    frame_data.x_acc = (int16_t(data[0]<<8 | data[1]))>>2;
+    frame_data.y_acc = (int16_t(data[2]<<8 | data[3]))>>2;
+    frame_data.z_acc = (int16_t(data[4]<<8 | data[5]))>>2;
     frame_data_mutex.unlock();
 }
 
