@@ -1,5 +1,6 @@
 #include "gps.h"
 #include <cstdint>
+#include <cstdio>
 Thread gps_thread(osPriorityNormal,1024,nullptr,"GPSThread");
 
 static char buffer[83];
@@ -28,15 +29,19 @@ static uint32_t date = 0;
 /**
 * Static function to analyze the gps msg and find the specific one we need to fill a msg.
 */
-
 static void parse_gps_msg(){
     if ((strncmp(buffer, "$GPGGA",6)==0) && (!found_gps_msg)){
         sscanf(buffer, "$GPGGA,%f,%f,%c,%f,%c,%hhu,%hhu,%f,%f,%c", &time_stamp,&latitude,&latitude_c,&longitude,&longitude_c,&quality,&sats,&hdop,&altitude,&altitude_c);
         if (sats>0){
             frame_data_mutex.lock();
-            //TODO signo
             latitude = latitude/100.0;
+            if (latitude_c=='S') {
+                latitude = -1*latitude;
+            }
             longitude = longitude/100.0;
+            if (longitude_c=='W') {
+                longitude = -1*longitude;
+            }
             frame_data.latitude = *(uint32_t *)&latitude;
             frame_data.longitude = *(uint32_t *)&longitude;
             frame_data.altitude = (uint16_t)altitude;
@@ -73,7 +78,6 @@ static void gps_read_data(){
 }
 
 void gps_init(){
-    //TODO initialize the gps data
     frame_data_mutex.lock();
     float longitude = -3.609561;
     frame_data.longitude = *(uint32_t *)&longitude;
