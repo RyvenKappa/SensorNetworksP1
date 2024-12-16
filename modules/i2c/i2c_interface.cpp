@@ -4,6 +4,8 @@
 #include "../accelerometer_sensor/accelerometer.h"
 #include "../color_sensor/color_sensor.h"
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 
 Thread i2c_thread(osPriorityNormal,512,nullptr,"I2CThread");
 
@@ -23,19 +25,25 @@ static void i2c_read_sensors(){
 
 
 void i2c_thread_init(){
+    // Initialize all the frame data related to acc, color, and temp&hum.
     frame_data_mutex.lock();
-    frame_data.x_acc = -9;
-    frame_data.y_acc = 2;
-    frame_data.z_acc = 1;
+    frame_data.x_acc = 0;
+    frame_data.y_acc = 0;
+    frame_data.z_acc = 0;
     frame_data.temp = 20;
     frame_data.hum = 15;
-    frame_data.clear = 200;
-    frame_data.red = 100;
-    frame_data.green = 50;
-    frame_data.blue = 50;
+    frame_data.clear = 0;
+    frame_data.red = 0;
+    frame_data.green = 0;
+    frame_data.blue = 0;
     frame_data_mutex.unlock();
+    // Configure sensors.
     accelerometer_sensor_init();
     color_sensor_init();
+    // Start the thread.
     osStatus codigo = i2c_thread.start(&i2c_read_sensors);
-    printf("Cosa de error: %d\n",codigo);
+    if (codigo != 0){
+        fprintf(stderr, "Error on the start of the I2C Thread, code: %d. Exiting the app.\n", codigo);
+        exit(0);
+    }
 }

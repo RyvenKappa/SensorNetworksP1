@@ -8,7 +8,8 @@
 * @brief Utilities for memory analysis.
 *
 * @author Diego Aceituno Seoane
-*
+* 
+* @date 12-16-2024
 * Allows the developer to see the usage of different memory elements such as the stack size for each thread.
 * 
 */
