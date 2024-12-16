@@ -33,9 +33,12 @@ static void parse_gps_msg(){
     if ((strncmp(buffer, "$GPGGA",6)==0) && (!found_gps_msg)){
         sscanf(buffer, "$GPGGA,%f,%f,%c,%f,%c,%hhu,%hhu,%f,%f,%c", &time_stamp,&latitude,&latitude_c,&longitude,&longitude_c,&quality,&sats,&hdop,&altitude,&altitude_c);
         frame_data_mutex.lock();
-        frame_data.gps_conn = sats;
-        frame_data.latitude = latitude;
-        frame_data.longitude = longitude;
+        //TODO signo
+        latitude = latitude/100.0;
+        longitude = longitude/100.0;
+        frame_data.latitude = *(uint32_t *)&latitude;
+        frame_data.longitude = *(uint32_t *)&longitude;
+        frame_data.altitude = (uint16_t)altitude;
         frame_data_mutex.unlock();
         found_gps_msg = true;
     }else if ((strncmp(buffer, "$GPRMC",6)==0) && (!found_gps_date)) {
@@ -70,8 +73,8 @@ static void gps_read_data(){
 void gps_init(){
     //TODO initialize the gps data
     frame_data_mutex.lock();
-    frame_data.longitude = 45.122130;
-    frame_data.latitude = -3.00022;
+    frame_data.longitude = 0;
+    frame_data.latitude = 0;
     frame_data.altitude = 700;
     frame_data_mutex.unlock();
     serial.enable_input(false);
