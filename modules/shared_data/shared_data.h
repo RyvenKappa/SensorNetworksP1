@@ -10,7 +10,6 @@
 * @author Diego Aceituno Seoane
 *
 * @date 16-12-2024
-* Controls a Si7021-A20 temperature and Humidity sensor
 *
 */
 
@@ -35,9 +34,9 @@ typedef struct PACKED {
     uint16_t    moisture  : 10;   /*!< 10b moisture as a percentage with 1 digit * 10 */
 } frame_data_t;
 
-extern frame_data_t frame_data;
+extern frame_data_t frame_data;   /*!< Frame data element */
 
-extern Mutex frame_data_mutex;
+extern Mutex frame_data_mutex;    /*!< Mutex to access the structure */
 
 #endif
 
