@@ -44,9 +44,9 @@ static void parse_gps_msg(){
             if (longitude_c=='W') {
                 longitude = -1*longitude;
             }
-            frame_data.latitude = *(uint32_t *)&latitude;
-            frame_data.longitude = *(uint32_t *)&longitude;
-            frame_data.altitude = (uint16_t)altitude;
+            frame_data.measurement_report.latitude = *(uint32_t *)&latitude;
+            frame_data.measurement_report.longitude = *(uint32_t *)&longitude;
+            frame_data.measurement_report.altitude = (uint16_t)altitude;
             frame_data_mutex.unlock();
         }
         found_gps_msg = true;
@@ -86,10 +86,10 @@ void gps_init(){
     // Set the frame data related to the GPS in madrid.
     frame_data_mutex.lock();
     float longitude = -3.609561;
-    frame_data.longitude = *(uint32_t *)&longitude;
+    frame_data.measurement_report.longitude = *(uint32_t *)&longitude;
     float latitude = 40.386017;
-    frame_data.latitude = *(uint32_t *)&latitude;
-    frame_data.altitude = 700;
+    frame_data.measurement_report.latitude = *(uint32_t *)&latitude;
+    frame_data.measurement_report.altitude = 700;
     frame_data_mutex.unlock();
 
     serial.enable_input(false);

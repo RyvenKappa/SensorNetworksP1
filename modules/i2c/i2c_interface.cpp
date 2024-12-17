@@ -27,15 +27,15 @@ static void i2c_read_sensors(){
 void i2c_thread_init(){
     // Initialize all the frame data related to acc, color, and temp&hum.
     frame_data_mutex.lock();
-    frame_data.x_acc = 0;
-    frame_data.y_acc = 0;
-    frame_data.z_acc = 0;
-    frame_data.temp = 20;
-    frame_data.hum = 15;
-    frame_data.clear = 0;
-    frame_data.red = 0;
-    frame_data.green = 0;
-    frame_data.blue = 0;
+    frame_data.measurement_report.x_acc = 0;
+    frame_data.measurement_report.y_acc = 0;
+    frame_data.measurement_report.z_acc = 0;
+    frame_data.measurement_report.temp = 20;
+    frame_data.measurement_report.hum = 15;
+    frame_data.measurement_report.clear = 0;
+    frame_data.measurement_report.red = 0;
+    frame_data.measurement_report.green = 0;
+    frame_data.measurement_report.blue = 0;
     frame_data_mutex.unlock();
     // Configure sensors.
     accelerometer_sensor_init();

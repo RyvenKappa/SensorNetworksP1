@@ -13,11 +13,7 @@
 *
 */
 
-/**
-* @brief Structure for the frame sent to the lorawan application
-*/
-typedef struct PACKED {
-    uint8_t     header    : 8;    /*!< 1B version and type and flags */
+typedef struct PACKED{
     uint32_t    latitude  : 32;   /*!< 4B full float latitude */
     uint32_t    longitude : 32;   /*!< 4B full float longitude */
     uint16_t    altitude  : 16;   /*!< 2B full altitude from the gps */
@@ -32,6 +28,16 @@ typedef struct PACKED {
     int16_t     z_acc     : 14;   /*!< 14b acceleration in the z axis from the sensor */
     uint16_t    light     : 10;   /*!< 10b light as a percentage with 1 digit * 10 */
     uint16_t    moisture  : 10;   /*!< 10b moisture as a percentage with 1 digit * 10 */
+} measurement_report_t;
+
+/**
+* @brief Structure for the frame sent to the lorawan application
+*/
+typedef struct PACKED {
+    uint8_t     header    : 8;    /*!< 1B version and type and flags */
+    union{
+        measurement_report_t measurement_report;
+    };
 } frame_data_t;
 
 extern frame_data_t frame_data;   /*!< Frame data element */

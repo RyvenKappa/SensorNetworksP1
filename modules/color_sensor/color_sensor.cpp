@@ -16,10 +16,10 @@ static char data[8];
 static void measurement_process(){
     // Original data is processed and inserted in the frame structure for lora
     frame_data_mutex.lock();
-    frame_data.clear = data[1]<<8 | data[0];
-    frame_data.red = data[3]<<8 | data[2];
-    frame_data.green = (data[5]<<8 | data[4]) + frame_data.red*0.15; //Spectral compensation is added to the green.
-    frame_data.blue = (data[7]<<8 | data[6]) + frame_data.red*0.25;  //Spectral compensation is added to the blue.
+    frame_data.measurement_report.clear = data[1]<<8 | data[0];
+    frame_data.measurement_report.red = data[3]<<8 | data[2];
+    frame_data.measurement_report.green = (data[5]<<8 | data[4]) + frame_data.measurement_report.red*0.15; //Spectral compensation is added to the green.
+    frame_data.measurement_report.blue = (data[7]<<8 | data[6]) + frame_data.measurement_report.red*0.25;  //Spectral compensation is added to the blue.
     frame_data_mutex.unlock();
 }
 
