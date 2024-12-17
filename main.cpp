@@ -34,6 +34,7 @@
 #include "./modules/i2c/i2c_interface.h"
 #include "./modules/moisture_sensor/moisture_sensor.h"
 #include "./modules/brightness_sensor/brightness_sensor.h"
+#include "./modules/led/led_module.h"
 
 frame_data_t frame_data;
 Mutex frame_data_mutex;
@@ -186,8 +187,8 @@ int main(void)
     }
 
     printf("\r\n Connection - In Progress ...\r\n");
-
-
+    
+    led_init();
     gps_init();
     i2c_thread_init();
 
