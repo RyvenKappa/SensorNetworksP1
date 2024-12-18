@@ -248,16 +248,16 @@ static void receive_message()
     }
     printf("\r\n");
     switch (rx_buffer[1]) {
-        case 01:
+        case 0x01:
             change_led_color(false, false, false);
             break;
-        case 02:
+        case 0x02:
             change_led_color(true, false, false);
             break;
-        case 04:
+        case 0x04:
             change_led_color(false, true, false);
             break;
-        case 10:
+        case 0x10:
             change_led_color(false, false, true);
             break;
         default:
