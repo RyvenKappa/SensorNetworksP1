@@ -44,62 +44,64 @@ function parsePayload(appeui,deveui,payload)
   	worked, err = resiot_setnodevalue(appeui, deveui, "X_acc", x_acc)
   	--resiot_debug(x_acc)
   
-  	raw_Yacc_bytes = resiot_int16(resiot_ba2intLE16({payload[25],payload[26]}))
-  	masked_Yacc = (resiot_int16(resiot_and64(0x3FFF,raw_Yacc_bytes)*4))/4
+  	--Nueva parte-------
+  	--Luz esta en porcentaje multiplicado por 10, usando 10 bits
+	raw_light_bytes = resiot_ba2intLE16({payload[25],payload[26]})
+  	masked_light = resiot_and64(0x03FF,raw_light_bytes)--Mascara de 10 bits
+  	light = tonumber(string.format("%.2f", (masked_light/10.0)))
+  	worked, err = resiot_setnodevalue(appeui, deveui, "Light", light)
+  
+  	raw_Yacc_bytes = resiot_int16(resiot_ba2intLE16({payload[26],payload[27]}))
+  	masked_Yacc = (resiot_int16(resiot_and64(0xFFFC,raw_Yacc_bytes))/4)
   	y_acc = masked_Yacc*9.80665/1024.0
   	worked, err = resiot_setnodevalue(appeui, deveui, "Y_acc", y_acc)
   	--resiot_debug(y_acc)
-  
-  	Z_raw = resiot_ba2intLE32({payload[26],payload[27],payload[28],0xFF})
-  	masked_z_raw = resiot_int16(resiot_and64(0x000FFFC0,Z_raw)/(2^2))
-  	shifted_z_raw = masked_z_raw/(2^4)
-  	z_value = resiot_int16(shifted_z_raw)
-  	z_acc = z_value*9.80665/1024.0
- 	worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
-  	resiot_debug(z_acc)
-  
-  	light_raw = resiot_ba2intLE16({payload[28],payload[29]})
-  	masked_light_raw = resiot_and64(0x0FFC,light_raw)
-  	shifted_light_raw = masked_light_raw/4.0
-  	light = shifted_light_raw/10.0
-  	worked, err = resiot_setnodevalue(appeui, deveui, "Light", light)
-  
-  	moisture_raw = resiot_ba2intLE16({payload[29],payload[30]})
-  	masked_moisture_raw = resiot_and64(0xFFC0,moisture_raw)
-  	shifted_moisture_raw = masked_moisture_raw/(2^6)
-  	moisture = shifted_moisture_raw/10.0
+ 
+   	--Moisture esta en porcentaje multiplicado por 10, usando 10 bits
+	raw_moisture_bytes = resiot_ba2intLE16({payload[28],payload[29]})
+  	masked_moisture = resiot_and64(0x03FF,raw_moisture_bytes)--Mascara de 10 bits
+  	moisture = tonumber(string.format("%.2f", (masked_moisture/10.0)))
   	worked, err = resiot_setnodevalue(appeui, deveui, "Moisture", moisture)
-  	--raw_Zacc_bytes = resiot_int32(resiot_ba2intLE32({,payload[26],payload[27],payload[28]}))
-  	--masked_Zacc = (resiot_int16(resiot_and64(0xFFFF,raw_Zacc_bytes)))
+  
+  	raw_Zacc_bytes = resiot_int16(resiot_ba2intLE16({payload[29],payload[30]}))
+  	masked_Zacc = (resiot_int16(resiot_and64(0xFFFC,raw_Zacc_bytes))/4)
+  	z_acc = masked_Zacc*9.80665/1024.0
+  	worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
+  	--resiot_debug(y_acc)
+  
+  	-------------Anitgua estructura
+  	--raw_Yacc_bytes = resiot_int16(resiot_ba2intLE16({payload[25],payload[26]}))
+  	--masked_Yacc = (resiot_int16(resiot_and64(0x3FFF,raw_Yacc_bytes)*4))/4
   	--y_acc = masked_Yacc*9.80665/1024.0
   	--worked, err = resiot_setnodevalue(appeui, deveui, "Y_acc", y_acc)
-  	--resiot_debug(masked_Yacc)
+  	--resiot_debug(y_acc)
   
-    --x_acc_raw = resiot_ba2int8(payload[12])
-  	--x_acc = x_acc_raw*9.80665/16.0
- 	--worked, err = resiot_setnodevalue(appeui, deveui, "X_acc", x_acc)
-  	
+  	--Z_raw = resiot_ba2intLE32({payload[26],payload[27],payload[28],0xFF})
+  	--masked_z_raw = resiot_int16(resiot_and64(0x000FFFC0,Z_raw)/(2^2))
+  	--shifted_z_raw = masked_z_raw/(2^4)
+  	--z_value = resiot_int16(shifted_z_raw)
+  	--z_acc = z_value*9.80665/1024.0
+ 	--worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
+  	--resiot_debug(z_acc)
   
-  	--y_acc_raw = resiot_ba2int8(payload[13])
-  	--y_acc = y_acc_raw*9.80665/16.0
-  	--worked, err = resiot_setnodevalue(appeui, deveui, "Y_acc", y_acc)
-
-  	--z_acc_raw = resiot_ba2int8(payload[14])
-  	--z_acc = z_acc_raw*9.80665/16.0
-  	--worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
-  
-  
-	--light = resiot_ba2intLE16({payload[27],payload[28]})
+  	--light_raw = resiot_ba2intLE16({payload[28],payload[29]})
+  	--masked_light_raw = resiot_and64(0x0FFC,light_raw)
+  	--resiot_debug(light_raw)
+  	--shifted_light_raw = masked_light_raw/4.0
+  	--light = shifted_light_raw/10.0
   	--worked, err = resiot_setnodevalue(appeui, deveui, "Light", light)
   
-  	--moisture = resiot_ba2intLE16({payload[29],payload[30]})
+  	--moisture_raw = resiot_ba2intLE16({payload[29],payload[30]})
+  	--masked_moisture_raw = resiot_and64(0xFFC0,moisture_raw)
+  	--shifted_moisture_raw = masked_moisture_raw/(2^6)
+  	--moisture = shifted_moisture_raw/10.0
   	--worked, err = resiot_setnodevalue(appeui, deveui, "Moisture", moisture)
 end
 
 Origin = resiot_startfrom()
 
 if Origin == "Manual" then
-  payload = "1000000000000000000000905f4c216c260822a465dbc1fe99800a2f0106"
+  payload = "00488b21420c0367c0bc02dd6e2922792bb12b285e4da2fe10d80200b8f0"
   appeui = "70b3d57ed000ac4a"
   deveui = "7139323559379194"
 else
