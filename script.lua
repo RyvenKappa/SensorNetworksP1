@@ -3,7 +3,27 @@ function parsePayload(appeui,deveui,payload)
   	payload = resiot_hexdecode(payload)
   	header = payload[1]
   	--El primer byte del payload es un header
-  
+  	--2 bits de version
+  	--3 bits para el led, RGB
+  	--3 de message type
+  	version = resiot_and64(0x03,header)
+  	
+  	header_led_raw = resiot_and64(0x1C,header)
+  	header_led = header_led_raw/2^2
+  	resiot_debug(header_led_raw)
+  	if header_led==0 then
+    	worked, err = resiot_setnodevalue(appeui, deveui, "LEDStatus", "OFF")
+    elseif header_led==1 then
+    	worked, err = resiot_setnodevalue(appeui, deveui, "LEDStatus", "RED")
+    elseif header_led == 2 then
+    	worked, err = resiot_setnodevalue(appeui, deveui, "LEDStatus", "GREEN")
+    elseif header_led == 4 then
+    	worked, err = resiot_setnodevalue(appeui, deveui, "LEDStatus", "BLUE")
+    end
+    
+  	msg_type = resiot_and64(0xE0,header)
+  	
+  	
 	latitude = resiot_ba2float32LE({payload[2],payload[3],payload[4],payload[5]})
   	worked, err = resiot_setnodevalue(appeui, deveui, "Latitude", latitude)
 	longitude = resiot_ba2float32LE({payload[6],payload[7],payload[8],payload[9]})
@@ -68,40 +88,12 @@ function parsePayload(appeui,deveui,payload)
   	z_acc = masked_Zacc*9.80665/1024.0
   	worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
   	--resiot_debug(y_acc)
-  
-  	-------------Anitgua estructura
-  	--raw_Yacc_bytes = resiot_int16(resiot_ba2intLE16({payload[25],payload[26]}))
-  	--masked_Yacc = (resiot_int16(resiot_and64(0x3FFF,raw_Yacc_bytes)*4))/4
-  	--y_acc = masked_Yacc*9.80665/1024.0
-  	--worked, err = resiot_setnodevalue(appeui, deveui, "Y_acc", y_acc)
-  	--resiot_debug(y_acc)
-  
-  	--Z_raw = resiot_ba2intLE32({payload[26],payload[27],payload[28],0xFF})
-  	--masked_z_raw = resiot_int16(resiot_and64(0x000FFFC0,Z_raw)/(2^2))
-  	--shifted_z_raw = masked_z_raw/(2^4)
-  	--z_value = resiot_int16(shifted_z_raw)
-  	--z_acc = z_value*9.80665/1024.0
- 	--worked, err = resiot_setnodevalue(appeui, deveui, "Z_acc", z_acc)
-  	--resiot_debug(z_acc)
-  
-  	--light_raw = resiot_ba2intLE16({payload[28],payload[29]})
-  	--masked_light_raw = resiot_and64(0x0FFC,light_raw)
-  	--resiot_debug(light_raw)
-  	--shifted_light_raw = masked_light_raw/4.0
-  	--light = shifted_light_raw/10.0
-  	--worked, err = resiot_setnodevalue(appeui, deveui, "Light", light)
-  
-  	--moisture_raw = resiot_ba2intLE16({payload[29],payload[30]})
-  	--masked_moisture_raw = resiot_and64(0xFFC0,moisture_raw)
-  	--shifted_moisture_raw = masked_moisture_raw/(2^6)
-  	--moisture = shifted_moisture_raw/10.0
-  	--worked, err = resiot_setnodevalue(appeui, deveui, "Moisture", moisture)
 end
 
 Origin = resiot_startfrom()
 
 if Origin == "Manual" then
-  payload = "00488b21420c0367c0bc02dd6e2922792bb12b285e4da2fe10d80200b8f0"
+  payload = "12488b21420c0367c0bc02780197008f0083009464f365ff17d8ff00c00f"
   appeui = "70b3d57ed000ac4a"
   deveui = "7139323559379194"
 else
