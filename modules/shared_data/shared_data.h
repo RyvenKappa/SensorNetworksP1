@@ -33,10 +33,10 @@ typedef struct PACKED{
     int16_t     temp      : 16;   /*!< 2B full temp data from the temperature sensor */
     uint16_t    hum       : 10;   /*!< 10b humidity as a percentage with 1 digit * 10 */
     int16_t     x_acc     : 14;   /*!< 14b acceleration in the x axis from the sensor */
-    int16_t     y_acc     : 14;   /*!< 14b acceleration in the y axis from the sensor */
-    int16_t     z_acc     : 14;   /*!< 14b acceleration in the z axis from the sensor */
     uint16_t    light     : 10;   /*!< 10b light as a percentage with 1 digit * 10 */
+    int16_t     y_acc     : 14;   /*!< 14b acceleration in the y axis from the sensor */
     uint16_t    moisture  : 10;   /*!< 10b moisture as a percentage with 1 digit * 10 */
+    int16_t     z_acc     : 14;   /*!< 14b acceleration in the z axis from the sensor */
 } measurement_report_t;
 
 /**
