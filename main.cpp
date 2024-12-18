@@ -255,7 +255,7 @@ static void receive_message()
         printf("%02x ", rx_buffer[i]);
     }
     printf("\r\n");
-    //TODO switch según el comando especificado en el header
+    //rx_buffer[0] contiene la cabecera del mensaje, asumimos 01
     switch (rx_buffer[0]) {
         case 0x01:
             //Recibido mensaje para cambiar el led, toca analizar el segundo byte del payload
