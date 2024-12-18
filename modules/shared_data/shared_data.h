@@ -13,6 +13,15 @@
 *
 */
 
+
+/**
+* @brief Type of message for the 3lsb of the Header
+*/
+typedef enum{
+    MEASUREMENT_REPORT,
+    LED_CHANGE,
+} msg_type_t;
+
 typedef struct PACKED{
     uint32_t    latitude  : 32;   /*!< 4B full float latitude */
     uint32_t    longitude : 32;   /*!< 4B full float longitude */
@@ -34,7 +43,9 @@ typedef struct PACKED{
 * @brief Structure for the frame sent to the lorawan application
 */
 typedef struct PACKED {
-    uint8_t     header    : 8;    /*!< 1B version and type and flags */
+    uint8_t     version   : 2;    /*!< Header 2b version, used in both DL and UL */
+    uint8_t     led_state : 3;    /*!< Header 3b for the led status or  unused in DownLink */
+    msg_type_t     msg_type  : 3; /*!< Header 3b For message type, used in both DL and UL */
     union{
         measurement_report_t measurement_report;
     };

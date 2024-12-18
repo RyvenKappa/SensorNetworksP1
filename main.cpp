@@ -188,6 +188,14 @@ int main(void)
 
     printf("\r\n Connection - In Progress ...\r\n");
     
+
+    //Initialization of the Header
+    frame_data_mutex.lock();
+    frame_data.version = 0;
+    frame_data.led_state = 0;
+    frame_data.msg_type=MEASUREMENT_REPORT;
+    frame_data_mutex.unlock();
+
     led_init();
     gps_init();
     i2c_thread_init();
@@ -205,9 +213,9 @@ static void send_message()
 {
     int16_t retcode;
     frame_data_mutex.lock();
-    frame_data.header = 0x10;//TODO definir el header
     frame_data.measurement_report.moisture = (int)(read_moisture_sensor_data()*10);
     frame_data.measurement_report.light = (int)(read_brightness_sensor_data()*10);
+    printf("valor de la luz: %d\n",frame_data.measurement_report.clear);
     retcode = lorawan.send(MBED_CONF_LORA_APP_PORT, (uint8_t *) &frame_data, sizeof(frame_data),
                            MSG_UNCONFIRMED_FLAG);
     frame_data_mutex.unlock();
@@ -247,18 +255,31 @@ static void receive_message()
         printf("%02x ", rx_buffer[i]);
     }
     printf("\r\n");
+    //TODO switch según el comando especificado en el header
     switch (rx_buffer[1]) {
         case 0x01:
             change_led_color(false, false, false);
+            frame_data_mutex.lock();
+            frame_data.led_state = 0;
+            frame_data_mutex.unlock();
             break;
         case 0x02:
             change_led_color(true, false, false);
+            frame_data_mutex.lock();
+            frame_data.led_state = 1;
+            frame_data_mutex.unlock();
             break;
         case 0x04:
             change_led_color(false, true, false);
+            frame_data_mutex.lock();
+            frame_data.led_state = 2;
+            frame_data_mutex.unlock();
             break;
         case 0x10:
             change_led_color(false, false, true);
+            frame_data_mutex.lock();
+            frame_data.led_state = 4;
+            frame_data_mutex.unlock();
             break;
         default:
             break;
