@@ -1,0 +1,74 @@
+\documentclass[a4paper,11pt]{article}
+\input{config.tex}
+
+\title{Sensor Networks: Final Project}
+\author{Diego Aceituno Seoane}
+\date{December 2024}
+
+\begin{document}
+\begin{titlepage}
+    \raggedleft
+    \rule{2pt}{\textheight}
+    \hspace{0.05\textwidth}
+    \parbox[b]{0.9\textwidth}{
+            {\Huge\bfseries LoRaWAN communications for a plant monitoring IoT System}\\[\baselineskip] % Title
+            {\Large\textit{Project documentation}}\\[7\baselineskip] % Subtitle or further description
+        \vspace{0.45\textheight}
+        
+        {\Large\textsc{Diego\ Aceituno\ Seoane}}\\[1.5\baselineskip]
+        \vspace{0.05\textheight}
+        
+        {\noindent\large Embedded Platforms and Communications for IoT}\\
+        {\noindent\large Fall 2024}\\
+    }
+\end{titlepage}
+\clearpage
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[L]{}
+\fancyfoot[L]{}
+\fancyfoot[R]{\thepage}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+\thispagestyle{indicefig}
+\listoffigures
+\listoftables
+\clearpage
+\include{includes/acro.tex}
+\clearpage
+\fancyhead[R]{\textit{INTRODUCTION}}
+\include{includes/introduction.tex}
+\clearpage
+\fancyhead[R]{\textit{REQUIREMENTS ANALYSIS}}
+\include{includes/requirements.tex}
+\clearpage
+\fancyhead[R]{\textit{NODE SOFTWARE}}
+\include{includes/software.tex}
+\clearpage
+\fancyhead[R]{\textit{ADVANCED MODE IMPLEMENTATION}}
+\include{includes/advanced.tex}
+\clearpage
+\fancyhead[R]{\textit{NETWORK SERVER CONFIGURATION}}
+\include{includes/network_server.tex}
+\clearpage
+\fancyhead[R]{\textit{PROBLEMS DETECTED AND SOLUTIONS IMPLEMENTED}}
+\include{includes/problems.tex}
+\clearpage
+\fancyhead[R]{\textit{TESTING AND VALIDATION}}
+\include{includes/testing.tex}
+\clearpage
+\fancyhead[R]{\textit{DOCUMENTATION}}
+\include{includes/documentation.tex}
+\clearpage
+\fancyhead[R]{\textit{RESULTS}}
+\include{includes/results.tex}
+\clearpage
+\fancyhead[R]{\textit{REFERENCES}}
+\printbibliography[title={REFERENCES}, heading=bibnumbered]
+\clearpage
+\fancyhead[R]{\textit{APPENDIX}}
+\section{APPENDIX: Shared data structures}
+\label{appendix}
+\lstinputlisting[caption={Shared\_data.h}, label={lst:myfile}]{../modules/shared_data/shared_data.h}
+\end{document}
