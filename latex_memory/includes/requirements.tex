@@ -9,29 +9,17 @@ This section presents in the next tables the list of requirements needed to impl
             \hline
             \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
             \hline
-            SR1 & The temperature in the range of -10ºC to 50ºC. Accuracy to one tenth of a degree. & Y\\
+            Phase2.1 & The target must be able to send the location. & Yes\\
             \hline
-            SR2 & The relative humidity in the range of 25\%HR to 75\%HR. Accuracy to one tenth of a percent. & Y\\
+            Phase2.2 & The target must be able to send, apart from the location, 3 environmental parameters. & Yes\\
             \hline
-            SR3 & Ambient light in \%, corresponding 0\% to total darkness and 100\% to maximum light. Accuracy to one tenth of a percent. & Y\\
+            Phase2.3 & The dashboard must have a widget to represent the previous parameters values. & Yes\\
             \hline
-            SR4 & Soil moisture in \%, corresponding 0\% to total dryness and 100\% to maximum moisture. Accuracy to one tenth of a percent. & Y\\
-            \hline
-            SR5 & Colour of one leaf of the plant. The four associated parameters are clear, red, green, and blue values. & Y\\
-            \hline
-            SR6 & The global location of the plant should be registered. The GPS module also offers the current time (only time, the date is optional), that will be used to timestamp all the measurements taken by the system. & Y\\
-            \hline
-            SR7 & The acceleration of the plant. At least the three axes (X, Y and Z) values should be monitored. & Y\\
-            \hline
-            GR1 & The system must be robust and stable. & Y\\
-            \hline
-            GR2 & Task partitioning and threads management should be stablished according to the requirements. & Y\\
-            \hline
-            GR3 & The system starts in TEST MODE and changes from one operating mode to the next one (TEST – NORMAL ADVANCED - TEST...) by pressing the blue button B1 on the B-L072Z-LRWAN1 board in a circular way. & Y\\
+            Phase2.4 & The dashboard must allow the user to send commands to change the RGB Led. The commands should be: ``OFF'', ``Green'' and ``Red''.  & Yes\\
             \hline
         \end{tabular} 
     \end{center}
-    \caption{General requirements implementation status}
+    \caption{Phase 2 requirements implementation status}
     \label{ReqGeneral}
 \end{table}
 
@@ -43,64 +31,25 @@ This section presents in the next tables the list of requirements needed to impl
             \hline
             \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
             \hline
-            TM1 & Check connections and sensor management. & Y\\
+            Phase3.1 & Get all the parameters from the sensors. & Yes\\
             \hline
-            TM2 & All of the required variables should be monitored every 2 seconds. & Y\\
+            Phase3.2 & Convert the data format of the system parameters from string to the most appropriate type to reduce their length. & Yes\\
             \hline
-            TM3 & The system sends every 2 seconds all the measured values to the computer (using the USB virtual COM port of the B-L072Z-LRWAN1 board). & Y\\
-            \hline
-            TM4 & The RGB LED should be coloured in the dominant colour detected by the colour sensor. & Y\\
-            \hline
-            TM5 & In this mode, the LED1 of the B-L072Z-LRWAN1 board should be ON. & Y\\
+            Phase3.3 & Modify the LUA code to retrieve the values of all the parameters. & Yes\\
             \hline
         \end{tabular} 
     \end{center}
-    \caption{Test mode requirements implementation status}
+    \caption{Optional requirements implementation status}
     \label{ReqTest}
 \end{table}
 
-\begin{table}[H]
-    \begin{center}
-        \begin{tabular}{|p{0.1\textwidth} | p{0.7\textwidth} | p{0.15\textwidth}|}
-            \hline
-            \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
-            \hline
-            NM1 & All the required variables should be monitored with a cadence of 30s. & Y\\
-            \hline
-            NM2 & The system sends every 30 seconds all the measured values to the computer (using the USB virtual COM port of the B-L072Z-LRWAN1 board). & Y\\
-            \hline
-            NM3 & The system calculates the mean, maximum and minimum values of temperature, relative humidity, ambient light and soil moisture every hour. These values are sent to the computer when calculated. & Y\\
-            \hline
-            NM4 & The system calculates the dominant colour of the leave every hour. This means to calculate which colour has appeared as dominant more times during the last hour. This value is sent to the computer when calculated. & Y\\
-            \hline
-            NM5 & The system calculates the maximum and minimum values of the three axes (X, y and Z) of the accelerometer every hour. These values are sent to the computer when calculated. & Y\\
-            \hline
-            NM6 & The global location of the plant (coordinates) is sent to the computer every 30 seconds. This should include the GPS time (UTC) converted to local time. & Y\\
-            \hline
-            NM7 & Limits for every measured variable (temperature, humidity, ambient light, soil moisture, colour and acceleration) should be fixed. If the current values of the measured parameters are outside the limits, the RGB LED should indicate this situation using a different colour for every parameter. & Y\\
-            \hline
-            NM8 & In this mode, the LED2 of the B-L072Z-LRWAN1 board should be ON. & Y\\
-            \hline
-        \end{tabular} 
-    \end{center}
-    \caption{Normal mode requirements implementation status}
-    \label{ReqNormal}
-\end{table}
 \subsection{Extra specifications implemented}
-\begin{table}[H]
-    \begin{center}
-        \begin{tabular}{|p{0.1\textwidth} | p{0.7\textwidth} | p{0.15\textwidth}|}
-            \hline
-            \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
-            \hline
-            E1 & The date is also extracted from the GPS data. & Y\\
-            \hline
-            E2 & Compensation for the spectral response of the colour sensor is introduced. & Y\\
-            \hline
-            E3 & Automatic generation of the documentation with a Doxygen file and automatic publishing in a github pages. & Y\\
-            \hline
-        \end{tabular} 
-    \end{center}
-    \caption{Extra requirements implemented}
-    \label{ReqExtra}
-\end{table}
+
+To further expand the communication capabilities of the system, a frame header was implemented. This allows for:
+\begin{itemize}
+    \item Frame version.
+    \item Control and data separation.
+    \item Scalability.
+\end{itemize}
+
+The design for this is described in a specific \hyperref[header]{chapter} of the document.
