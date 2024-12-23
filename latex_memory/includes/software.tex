@@ -40,7 +40,7 @@ As we are using \acrshort{lorawan}, which analyzes a possible transmitting windo
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/4/Modules.png}
+    \includegraphics[width=0.85\textwidth]{images/4/Modules.png}
     \caption{Final module design for the system}
     \label{fig:modules}
 \end{figure}
@@ -58,3 +58,59 @@ To solve all this situation, the communication was reduced to a shared structure
 
 This structure is designed to be directly sent to the \acrshort{lorawan} software stack, so it's designed as a network frame. The structure is presented in the \hyperref[appendix]{appendix} and it's explained in the next chapters.
 \subsection{Frame design}
+
+The frame that is sent as payload in the application level of \acrshort{lorawan} is presented in the next table.
+\begin{table}[H]
+    \centering
+    \begin{bytefield}[bitwidth=1.45em]{30}
+        \bitheader{0,1,29} \\
+        \bitbox{1}{\tiny H \\D \\R} & \bitbox{29}{Message payload}
+     \end{bytefield}
+    \caption{Frame structure in bytes, with the header and the message payload}
+\end{table}
+
+It contains two main parts:
+\begin{itemize}
+    \item \textbf{The header}: this byte is defined as an advanced implementation, and is explained in the next chapter, but it provides support for message types, versions and led state.
+    \item \textbf{The payload}: this structure of 29 bytes contains the data. And the content varies depending on the message type. But the system mainly uses the measurement report type, which contains all the sensor data to cover the requirements of the project. This type is presented in the next table.
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{bytefield}[bitwidth=1.35em]{32}
+        \bitheader{0-31} \\
+        \wordbox{1}{Latitude} \\
+        \wordbox{1}{Longitude} \\
+        \bitbox{16}{Altitude} & \bitbox{16}{Clear} \\
+        \bitbox{16}{Green} & \bitbox{16}{Blue} \\
+        \bitbox{16}{Temperature} & \bitbox{10}{Humidity (\texttt{10b})} & \bitbox{6}{X\_Acc (MSB)}\\
+        \bitbox{8}{X\_Acc (LSB)(\texttt{14b})} & \bitbox{10}{Light(\texttt{10b})} & \bitbox{14}{Y\_Acc (\texttt{14b})} \\
+        \bitbox{10}{Moisture (\texttt{10b})} & \bitbox{14}{Z\_Acc (\texttt{14b})} & \bitbox{8}[bgcolor=lightgray]{}\\
+     \end{bytefield}
+    \caption{Measurement report structure}
+\end{table}
+
+All the data is sent as \textit{LITTLE ENDIAN}, and for each data the format was defined taking into account the constraint of the \texttt{29 Bytes}. The format for the measurement report data is:
+
+\begin{enumerate}
+    \item \textbf{Latitude \& Longitude }: The latitude and the longitude are transmitted as the whole signed float value (\texttt{4 Bytes} each), as any trunking of the value could potentially mean errors of several kilometers.
+    \item \textbf{Altitude}: For the altitude, an unsigned \texttt{16 bit} integer value is sent to represent the altitude in meters above the sea level. This is because the minimum for this project is around $700m$ above sea level (Madrid city).
+    \item \textbf{RGB Values}: The RGB Values are sent as raw data from the sensor, as unsigned \texttt{16 bit} values. This is done for all the sensor values which are: clear, read, green and blue, that means \texttt{8 Bytes} for the color data.
+    \item \textbf{Temperature}: The Temperature is still sent as raw data from the sensor, as a signed \texttt{16 bit} integer. This means that the processing to obtain the degrees value must be done in the network server.
+    \item \textbf{Humidity}: Up to this point, all the previous values where divisible by a whole \texttt{Byte}, but the message had already used 20 Bytes, and there was still the acceleration, humidity, light and soil moisture values that needed to be 
+    send in \texttt{9 Bytes}. To solve this, a encoding was defined for the humidity, light and moisture values to only use \texttt{10 bits}. This design is part of the problems found chapter.
+    %TODO moverlo a problemas
+    %\begin{enumerate}
+    %    \item The value is processed in the \acrfullr{mcu}, which gives a float \% value from \texttt{0.0} to \texttt{100.0} .
+    %    \item Then, the value is multiplied by 10 and converted to an unsigned integer.
+    %    \item Finally, as the value goes from \texttt{0} to \texttt{1000}, it can be expressed with only \texttt{10 bits}.
+    %    \item When received in the network server, the value can be divided by 10 and we have a percentage value with at least 1 decimal, which is perfect for this use case. This approach only reduces precision percentage values, while leaving full precision for the acceleration.
+    %\end{enumerate}
+    \item \textbf{X\_Acc}: The acceleration values are sent as they come from the sensor, transmitting the whole \texttt{14 bits} of each axis.
+    \item \textbf{Light}: The percentage value is transmitted using the same encoding for the humidity and soil moisture values in \texttt{10 bits}.
+    \item \textbf{Y\_Acc}: The Y-axis acceleration \texttt{14 bit} signed value.
+    \item \textbf{Soil Moisture}: The percentage value is transmitted using the same encoding for the humidity and light values in \texttt{10 bits}.
+    \item \textbf{Z\_Acc}: The Z-axis acceleration \texttt{14 bit} signed value.
+\end{enumerate}
+
+As the whole message with the header uses the \texttt{30 Byte} limit of the \acrshort{lorawan} stack, no padding was used.
+

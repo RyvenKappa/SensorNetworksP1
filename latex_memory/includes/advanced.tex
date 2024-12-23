@@ -1,1 +1,35 @@
 \section{ADVANCED HEADER IMPLEMENTATION}
+
+To give extensibility to the frame structure, the decision was made to add a \texttt{header} to the payload content. This gave the possibility to:
+\begin{itemize}
+    \item Have different payloads.
+    \item Configure the next payload in reaction to a \texttt{DownLink} message.
+    \item Give extensibility to add future payloads.
+\end{itemize}
+
+The \texttt{header} implementation is presented in the next table:
+\begin{table}[H]
+    \centering
+    \begin{bytefield}[bitwidth=5.5em]{8}
+        \bitheader{0-7} \\
+        \bitbox{3}{ MSG\_TYPE } & \bitbox{3}{ LED\_STATE} & \bitbox{2}{ VERSION } \\
+    \end{bytefield}
+    \caption{Header byte of the frame structure}
+\end{table}
+
+Each field has a different meaning a use case:
+\begin{itemize}
+    \item \textbf{MSG\_TYPE}: These three \texttt{bits} allow for the extensibility of the system, giving the possibility for 8 message types. For now, the next types are defined:
+    \begin{itemize}
+        \item 0 - \texttt{MEASUREMENT\_REPORT}: This type of message is used in \texttt{UpLink} to send measurements.
+        \item 1 - \texttt{LED\_CHANGE}: This type of message is used in \texttt{DownLink} from the server to the node to change the led color. If this type of message is used, the first \texttt{Byte} of the payload contains one of the next values: 
+        \texttt{0x01} for clear, \texttt{0x02} for red, \texttt{0x04} for green, \texttt{0x10} for blue.
+    \end{itemize}
+    \item \textbf{LED\_STATE}: These three \texttt{bits} are used whenever the system sends information \texttt{UpLink} to add the current state of the LED connected to the \acrshort{mcu}. Each bit correspond to the next component:
+    \begin{itemize}
+        \item \texttt{Bit $0$}: Red bit, if set to $1$, red component is \texttt{ON}.
+        \item \texttt{Bit $1$}: Green bit, if set to $1$, green component is \texttt{ON}.
+        \item \texttt{Bit $2$}: Blue bit, if set to $1$, blue component is \texttt{ON}.
+    \end{itemize}
+    \item \textbf{VERSION}: These two \texttt{bits} allow for future versions without needing to change older codes deployed. For now, these are not used and set to $0$.
+\end{itemize}
