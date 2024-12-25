@@ -81,10 +81,11 @@ It contains two main parts:
         \wordbox{1}{Latitude} \\
         \wordbox{1}{Longitude} \\
         \bitbox{16}{Altitude} & \bitbox{16}{Clear} \\
-        \bitbox{16}{Green} & \bitbox{16}{Blue} \\
-        \bitbox{16}{Temperature} & \bitbox{10}{Humidity (\texttt{10b})} & \bitbox{6}{X\_Acc (MSB)}\\
-        \bitbox{8}{X\_Acc (LSB)(\texttt{14b})} & \bitbox{10}{Light(\texttt{10b})} & \bitbox{14}{Y\_Acc (\texttt{14b})} \\
-        \bitbox{10}{Moisture (\texttt{10b})} & \bitbox{14}{Z\_Acc (\texttt{14b})} & \bitbox{8}[bgcolor=lightgray]{}\\
+        \bitbox{16}{Red} & \bitbox{16}{Green} \\
+        \bitbox{16}{Blue} & \bitbox{16}{Temperature} \\
+        \bitbox{10}{Humidity (\texttt{10b})} & \bitbox{14}{X\_Acc (\texttt{14b})} & \bitbox{8}{Light (\texttt{MS 8b})}\\
+        \bitbox{2}{\tiny Light(\texttt{2b})} & \bitbox{14}{Y\_Acc (\texttt{14b})} & \bitbox{10}{Moisture (\texttt{10b})} & \bitbox{6}{Z\_Acc (\texttt{MS 6b})}\\
+        \bitbox{8}{Z\_Acc (\texttt{LS 8b})} & \bitbox{24}[bgcolor=lightgray]{}\\
      \end{bytefield}
     \caption{Measurement report structure}
 \end{table}
