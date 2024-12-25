@@ -130,4 +130,25 @@ For any of the commands defined in the ResIoT application for the node, an assoc
 \end{enumerate}
 \clearpage
 \subsection{Dashboard design}
+
+The general look of the dashboard is presented in the \autoref{fig:dashboardfinal}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/6/Dashboard.png}
+    \caption{General look of the whole dashboard}
+    \label{fig:dashboardfinal}
+\end{figure}
+Each widget of the above is describing, following the order from the left to the right:
+\begin{itemize}
+    \item \textbf{Light \%}: A gauge widget is used to show the percentage of brightness. Goes from $0$ to $100$ with 1 decimal.
+    \item \textbf{Moisture \%}: A gauge widget is used to show the percentage of moisture in the soil from the node. Goes from $0$ to $100$ with 1 decimal.
+    \item \textbf{Temperature}: A gauge widget is used to show the temperature in Celsius degrees with 2 decimals, going from -10ºC to 50ºC, with 3 intervals: blue (-10 to 7), green (7 to 30) and orange (30 to 50).
+    \item \textbf{Humidity \%}: A gauge widget is used to show the percentage of relative humidity in the node. Goes from $0$ to $100$ with 1 decimal.
+    \item \textbf{RGB Sensor Analysis}: A bars widget is used to represent the next data from the node: clear, red, green and blue values.
+    \item \textbf{Acceleration data}: Another bars widget is used to represent the 3 axis of the accelerometer.
+    \item \textbf{History widgets}: For the previous data, several widgets are created to represent time series of the changing values, to let the user see problems.
+    \item \textbf{Location}: This widget uses the Latitude, Longitude and Altitude values to represent the location of the node in a map by \texttt{OpenStreetMap}.
+    \item \textbf{Led Status}: A list widget is used to represent the led status, which comes from each message received in the ResIoT server.
+    \item \textbf{Commands Window}: A buttons widget is used to let the user send the defined commands for the node from the dashboard.
+\end{itemize}
 \clearpage
