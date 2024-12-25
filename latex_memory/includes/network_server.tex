@@ -40,7 +40,50 @@ In the network server, a node was defined with the next characteristics:
     \item \textbf{APP\_KEY}: The same defined in the node configuration in \autoref{fig:nodeconfig}.
     \item \textbf{LoRaWAN Network Server}: This field points to the server ``eu72.resiot.io\:7677'', configured as a \acrshort{lorawan} Europe server (\texttt{868 MHz}) for Class A+C nodes.
     \item \textbf{Advanced LoRaWAN configuration}: the most important one is that it has \acrfullr{adr}. The reception windows offset are also by default.
-    \item \textbf{Node Fields}:
+    \item \textbf{Node Fields}: These elements allow for dynamic updates of the dashboard. The ones defined and used are as follows:
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|p{0.20\textwidth} | p{0.20\textwidth} |c| p{0.20\textwidth}| p{0.20\textwidth}|}
+                \hline
+                \textbf{Field Name} & \textbf{Content Type} & \textbf{Example value} & \textbf{Predefined in the node?}\\
+                \hline
+                Latitude & Numeric & $40.233921051$ & Yes \\
+                \hline
+                Longitude & Numeric & $-3.377102145$ & Yes \\
+                \hline
+                Altitude & Numeric & $665$ & Yes \\
+                \hline
+                Altitude & Numeric & $665$ & Yes \\
+                \hline
+                X\_Acc & Numeric & $-0.4692$ & No \\
+                \hline
+                Y\_Acc & Numeric & $0.0574608$ & No \\
+                \hline
+                Z\_Acc & Numeric & $9.65342109375$ & No \\
+                \hline
+                Temperature & Numeric & $23.02$ & No \\
+                \hline
+                Humidity & Numeric & $54.4$ & No \\
+                \hline
+                Clear & Numeric & $980$ & No \\
+                \hline
+                Red & Numeric & $365$ & No \\
+                \hline
+                Green & Numeric & $383$ & No \\
+                \hline
+                Blue & Numeric & $346$ & No \\
+                \hline
+                Light & Numeric & $3.8$ & No \\
+                \hline
+                Moisture & Numeric & $15.8$ & No \\
+                \hline
+                LEDStatus & String & OFF & No \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Configuration of the node fields in the ResIoT application.}
+        \label{Connections3}
+    \end{table}
 \end{itemize}
 \clearpage
 \subsection{LUA Scripting}
