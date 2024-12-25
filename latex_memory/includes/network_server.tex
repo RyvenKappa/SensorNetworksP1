@@ -85,8 +85,49 @@ In the network server, a node was defined with the next characteristics:
         \label{Connections3}
     \end{table}
 \end{itemize}
-\clearpage
+
+Finally, for the node, 4 commands were defined to control the RGB Led connected to the node.
+\begin{itemize}
+    \item LED OFF
+    \item LED RED
+    \item LED GREEN
+    \item LED BLUE
+\end{itemize}
 \subsection{LUA Scripting}
+\subsubsection*{On RX}
+For the automations of the node in the ResIoT application, a smart scene was defined to run on RX. This scene processes all the messages that the board sends.
+
+The scene in this case is the \texttt{SN\_TEST\_A}, with the hex id $73636531313632$. It is configured with a maximum number of instances of $10$ and a timeout of $600$ seconds.
+
+The script allows for the automatic obtention of the ``appeui'', ``deveui'' and payload parameters, both in automatic mode and in manual mode. When used in the manual mode, it injects 
+predefined values to validate the functionality without the connection to the node being required.
+
+When the previous data is obtained, the only function of the script (called \textit{parsePayload}) is called to parse the payload and set the specific node fields for the ``appeui'' and ```deveui''' parameters. This function follows the next structure:
+\begin{enumerate}
+    \item The data is decoded as hexadecimal bytes.
+    \item The header is processed to obtain mainly the LEDState, to assign the specific node field.
+    \item The GPS data such as the latitude, longitude and altitude is obtained using conversions to integers from \textit{LITTLE\_ENDIAN} byte arrays. No conversion is done.
+    \item The color values for the Clear, Red, Green and blue components are obtained and assign. No conversions are done.
+    \item The Temperature signed \texttt{16 bit} value is obtained and converted as the datasheet of the sensor specifies\cite{Support_Documents_TechnicalDocs_Si7021A20}:
+    \[
+    \text{Temperature} = \frac{175.72 \cdot \text{raw\_temp}}{65536.0} - 46.85
+    \]
+    \item All the previous data was align to bytes, but the next data is align every \texttt{3 bytes}, and for each combination of these \texttt{3 bytes}, the lowest \texttt{10 bits} represent a percentage value, the highest \texttt{14 bits} is one axis of the accelerometer. This is done only for the 9 last bytes of the payload.
+    \item The first \texttt{3 bytes} have the humidity(from 0 to 1000) and the X axis acceleration. The humidity is divided by 10.
+    \item The second \texttt{3 bytes} have the light percentage(from 0 to 1000) and the Y axis acceleration. The light is divided by 10.
+    \item The last \texttt{3 bytes} have the soil moisture percentage(from 0 to 10000) and the Z axis acceleration. The soil moisture is divided by 10.
+\end{enumerate}
+
+As LUA is a programming language that is not well suited for low level applications, this approach of bit manipulation caused a lot of problems. These problems and the solutions design are documented in \hyperref[problems]{a dedicated chapter}.
+
+\subsubsection*{On TX}
+
+For any of the commands defined in the ResIoT application for the node, an associated LUA script with few lines is defined. As all the defined commands have to do with the RGB Led, the script follows the same pattern across the commands:
+\begin{enumerate}
+    \item Configuration of the port and confirmation in the communication to the node.
+    \item Configuration of the \texttt{DevEUI} and \texttt{AppEUI} parameters.
+    \item Payload specification and sending to the node.
+\end{enumerate}
 \clearpage
 \subsection{Dashboard design}
 \clearpage
