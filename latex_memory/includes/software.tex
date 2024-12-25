@@ -36,7 +36,7 @@ The module are also used by the same threads:
 \clearpage
 \subsection{Threads and communication design} % Comentar los cambios realizados
 
-As we are using \acrshort{lorawan}, which analyzes a possible transmitting window for the next message, we need a method that ensures the maximum utilization of these windows without depending on the main thread. The final design for this can be seen in the next figure.
+\acrshort{lorawan} is used, which analyzes a possible transmitting window for the next message. Because of this, a method is needed that ensures the maximum utilization of these windows without depending on the main thread. The final design for this can be seen in the next figure.
 
 \begin{figure}[H]
     \centering
@@ -44,7 +44,6 @@ As we are using \acrshort{lorawan}, which analyzes a possible transmitting windo
     \caption{Final module design for the system}
     \label{fig:modules}
 \end{figure}
-%TODO QUITAR LOS "WE"
 In the previous project, the approach was having the main thread controlling the execution of the measuring threads with signals. In this project, that won't work because the main thread is controlled by the event-queue. 
 To solve this and taking into account the best-effort nature of the system, the decision was to make the measuring threads run independently of the main thread, waking themself up every \texttt{N} seconds. 
 
@@ -99,13 +98,6 @@ All the data is sent as \textit{LITTLE ENDIAN}, and for each data the format was
     \item \textbf{Temperature}: The Temperature is still sent as raw data from the sensor, as a signed \texttt{16 bit} integer. This means that the processing to obtain the degrees value must be done in the network server.
     \item \textbf{Humidity}: Up to this point, all the previous values where divisible by a whole \texttt{Byte}, but the message had already used 20 Bytes, and there was still the acceleration, humidity, light and soil moisture values that needed to be 
     send in \texttt{9 Bytes}. To solve this, a encoding was defined for the humidity, light and moisture values to only use \texttt{10 bits}. This design is part of the problems found chapter.
-    %TODO moverlo a problemas
-    %\begin{enumerate}
-    %    \item The value is processed in the \acrfullr{mcu}, which gives a float \% value from \texttt{0.0} to \texttt{100.0} .
-    %    \item Then, the value is multiplied by 10 and converted to an unsigned integer.
-    %    \item Finally, as the value goes from \texttt{0} to \texttt{1000}, it can be expressed with only \texttt{10 bits}.
-    %    \item When received in the network server, the value can be divided by 10 and we have a percentage value with at least 1 decimal, which is perfect for this use case. This approach only reduces precision percentage values, while leaving full precision for the acceleration.
-    %\end{enumerate}
     \item \textbf{X\_Acc}: The acceleration values are sent as they come from the sensor, transmitting the whole \texttt{14 bits} of each axis.
     \item \textbf{Light}: The percentage value is transmitted using the same encoding for the humidity and soil moisture values in \texttt{10 bits}.
     \item \textbf{Y\_Acc}: The Y-axis acceleration \texttt{14 bit} signed value.
