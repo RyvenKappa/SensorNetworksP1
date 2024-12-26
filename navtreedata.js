@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Sensor Networks P1", "index.html", [
+    [ "Repository for the Project 1 of the Sensor Networks course", "index.html", "index" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],

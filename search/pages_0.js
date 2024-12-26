@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['networks_20p1_0',['Sensor Networks P1',['../index.html',1,'']]]
+  ['1_20of_20the_20sensor_20networks_20course_0',['Repository for the Project 1 of the Sensor Networks course',['../index.html',1,'']]]
 ];
