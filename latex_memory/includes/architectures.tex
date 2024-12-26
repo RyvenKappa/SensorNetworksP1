@@ -21,7 +21,7 @@ This module implements a LoRa Modem, with some specific characteristics that are
     \item A bitrate up to \texttt{300 kbps}.
     \item A low RX current of \texttt{9.9 mA}.
     \item Apart from the LoRa modulation, it also supports \acrfullr{fsk}, \acrfullr{gfsk}, \acrfullr{msk} and \acrfullr{gmsk}.
-    \item Compatibility with another wireless system, Sigfox.
+    \item Compatibility with another wireless system such as Sigfox.
 \end{itemize}
 
 All this information was obtained from the reference datasheet.
@@ -43,7 +43,7 @@ The gateway is powered by an \texttt{32bit ARM9} processor. It's composed by 3 m
 \begin{itemize}
     \item A concentrator that focuses on obtaining data from the \acrshort{lorawan} signals. In this case, it uses the Europe frequency band, \texttt{868 MHz}.
     \item A host that processes the \acrfullr{rf} messages and communicates with the network serve, in this case, the ResIoT instance. The interface used for this communication is an Ethernet \texttt{10/100 Base T}.
-    \item Finally, a \acrfullr{gnss} module that supports GPS, Galileo or QZSS systems.
+    \item Finally, a \acrfullr{gnss} module to provide location. This module supports GPS, Galileo or QZSS systems.
 \end{itemize}
 
 Some extra features of the gateway that are not used for this project are:

@@ -16,7 +16,7 @@ This event-queue provides an asynchronous event dispatcher, in this case for \ac
 The solution is implemented by extending the previous event-queue. This event queue will detect possible TX windows in the \acrshort{lorawan} PHY layer and create an event to send a new message with data regarding the measurements of the plant sensors. These sensors are: 
 GPS, brightness, soil moisture, humidity, temperature, linear acceleration, RGB data and led status.
 
-To obtain this data, measurement threads are changed from the previous project, these threads read new values each 5 seconds and store the data in an mutex-controlled structure. This structure is later used when the \acrshort{lorawan} stack detects a possible transmitting window.
+To obtain this data, measurement threads are changed from the previous project, these threads are now independent and read new values each 5 seconds, storing the data in a mutex-controlled structure. This structure is later used when the \acrshort{lorawan} stack detects a possible transmitting window.
 
 The threads defined for the solution are:
 \begin{itemize}
@@ -53,9 +53,9 @@ The communication between the measuring threads and the main thread had to be re
     \item The system only focuses on sending the last measurements possible for each sensor, so there's no need for previous data that isn't processed.
 \end{itemize}
 
-To solve all this situation, the communication was reduced to a shared structure that contains all the necessary data that is going to be sent through \acrshort{lorawan}. The access to this common structure is done using a Mbed-OS mutex, that ensures the protection of the data and only allows the access of one thread at a time.
+To solve all this situation, the communication was reduced to a shared structure that contains all the necessary data that is going to be sent through \acrshort{lorawan}. The access to this common structure is done using a Mbed-OS mutex, that ensures the protection of the data, allowing access to one thread at a time.
 
-This structure is designed to be directly sent to the \acrshort{lorawan} software stack, so it's designed as a network frame. The structure is presented in the \hyperref[appendix]{appendix} and it's explained in the next chapters.
+This structure is designed to be directly sent to the \acrshort{lorawan} software stack, so it's designed as a network frame. The structure is presented in the \hyperref[appendixA]{appendix} and it's explained in the next chapters.
 \subsection{Frame design}
 
 The frame that is sent as payload in the application level of \acrshort{lorawan} is presented in the next table.

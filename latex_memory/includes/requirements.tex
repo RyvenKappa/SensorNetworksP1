@@ -45,7 +45,8 @@ This section presents in the next tables the list of requirements needed to impl
 
 \subsection{Extra specifications implemented}
 
-To further expand the communication capabilities of the system, a frame header was implemented. This allows for:
+To further expand the communication capabilities of the system, a frame based communication was designed. To achieve this, 
+the communication was optimized for \texttt{30 Bytes}. This design is based around a header byte that allows for:
 \begin{itemize}
     \item Frame version.
     \item Control and data separation.
