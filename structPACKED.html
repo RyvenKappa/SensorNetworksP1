@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="EPCIoT_Final_Project" />
+<meta property="og:image" content="https://github.com/RyvenKappa/EPCIoT_Final_Project/blob/main/doxygen/logo55.png?raw=true" />
+<meta property="og:description" content="Final Project for EPCIoT by Diego Aceituno Seoane." />
+<meta property="og:url" content="https://ryvenkappa.github.io/EPCIoT_Final_Project/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://github.com/RyvenKappa/EPCIoT_Final_Project/blob/main/doxygen/logo55.png?raw=true" />
+<meta name="twitter:title" content="EPCIoT_Final_Project" />
+<meta name="twitter:description" content="Final Project for EPCIoT by Diego Aceituno Seoane." />
+<!-- END twitter metadata -->
+<title>Sensor Networks P1: PACKED Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/jothepro/doxygen-awesome-css" class="github-corner" title="View source on GitHub" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo55.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sensor Networks P1
+   </div>
+   <div id="projectbrief">LoRaWAN for a plant monitoring system with D-L072CZ-LRWAN1</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('structPACKED.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
+  <div class="headertitle"><div class="title">PACKED Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Structure for the frame sent to the lorawan application.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="shared__data_8h_source.html">shared_data.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:aee34c7216eb3a890f9bee96975c31d02" id="r_aee34c7216eb3a890f9bee96975c31d02"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee34c7216eb3a890f9bee96975c31d02">latitude</a>: 32</td></tr>
+<tr class="separator:aee34c7216eb3a890f9bee96975c31d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8f58628bc41e9545300f3de63f6a86" id="r_a4b8f58628bc41e9545300f3de63f6a86"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b8f58628bc41e9545300f3de63f6a86">longitude</a>: 32</td></tr>
+<tr class="separator:a4b8f58628bc41e9545300f3de63f6a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816ee9328edd81f6ab98950c86d4f0ea" id="r_a816ee9328edd81f6ab98950c86d4f0ea"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a816ee9328edd81f6ab98950c86d4f0ea">altitude</a>: 16</td></tr>
+<tr class="separator:a816ee9328edd81f6ab98950c86d4f0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cf172995ff43598cf028867ad25592b" id="r_a9cf172995ff43598cf028867ad25592b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cf172995ff43598cf028867ad25592b">clear</a>: 16</td></tr>
+<tr class="separator:a9cf172995ff43598cf028867ad25592b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019b2bd656c8ea61e0ba28df3c759d9b" id="r_a019b2bd656c8ea61e0ba28df3c759d9b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a019b2bd656c8ea61e0ba28df3c759d9b">red</a>: 16</td></tr>
+<tr class="separator:a019b2bd656c8ea61e0ba28df3c759d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c5b0b0a9adcec316791e04ea034fb9" id="r_af3c5b0b0a9adcec316791e04ea034fb9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3c5b0b0a9adcec316791e04ea034fb9">green</a>: 16</td></tr>
+<tr class="separator:af3c5b0b0a9adcec316791e04ea034fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a976d2fe9709bd5fd6f0f41c002225679" id="r_a976d2fe9709bd5fd6f0f41c002225679"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a976d2fe9709bd5fd6f0f41c002225679">blue</a>: 16</td></tr>
+<tr class="separator:a976d2fe9709bd5fd6f0f41c002225679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab4ae6ccbb0fb6431f2ed891148f74a" id="r_aaab4ae6ccbb0fb6431f2ed891148f74a"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaab4ae6ccbb0fb6431f2ed891148f74a">temp</a>: 16</td></tr>
+<tr class="separator:aaab4ae6ccbb0fb6431f2ed891148f74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76fb63f288b25d2f7595d19dfceb99f1" id="r_a76fb63f288b25d2f7595d19dfceb99f1"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76fb63f288b25d2f7595d19dfceb99f1">hum</a>: 10</td></tr>
+<tr class="separator:a76fb63f288b25d2f7595d19dfceb99f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58736de0ea72d0d469ec3a9f1b728e3" id="r_ad58736de0ea72d0d469ec3a9f1b728e3"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad58736de0ea72d0d469ec3a9f1b728e3">x_acc</a>: 14</td></tr>
+<tr class="separator:ad58736de0ea72d0d469ec3a9f1b728e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40de3a1019f29124ad6c7d947c4500da" id="r_a40de3a1019f29124ad6c7d947c4500da"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40de3a1019f29124ad6c7d947c4500da">light</a>: 10</td></tr>
+<tr class="separator:a40de3a1019f29124ad6c7d947c4500da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af87cbbdc055a9a1102453499ebabbcbb" id="r_af87cbbdc055a9a1102453499ebabbcbb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af87cbbdc055a9a1102453499ebabbcbb">y_acc</a>: 14</td></tr>
+<tr class="separator:af87cbbdc055a9a1102453499ebabbcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb974eff4f0da339c5c934f07a900f93" id="r_afb974eff4f0da339c5c934f07a900f93"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb974eff4f0da339c5c934f07a900f93">moisture</a>: 10</td></tr>
+<tr class="separator:afb974eff4f0da339c5c934f07a900f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8c26b64f72b66a008cdafeb9e97adb" id="r_a8a8c26b64f72b66a008cdafeb9e97adb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a8c26b64f72b66a008cdafeb9e97adb">z_acc</a>: 14</td></tr>
+<tr class="separator:a8a8c26b64f72b66a008cdafeb9e97adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeff7ed521ea1bffc8e5320ccce9c5c15" id="r_aeff7ed521ea1bffc8e5320ccce9c5c15"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeff7ed521ea1bffc8e5320ccce9c5c15">version</a>: 2</td></tr>
+<tr class="separator:aeff7ed521ea1bffc8e5320ccce9c5c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a060972f3fd234b5061446c71e3eeddc6" id="r_a060972f3fd234b5061446c71e3eeddc6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a060972f3fd234b5061446c71e3eeddc6">led_state</a>: 3</td></tr>
+<tr class="separator:a060972f3fd234b5061446c71e3eeddc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a27aaae39cc5f8128ccc6072bfa50b4" id="r_a7a27aaae39cc5f8128ccc6072bfa50b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shared__data_8h.html#a76f51138d3051b734605c5bacc811dba">msg_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a27aaae39cc5f8128ccc6072bfa50b4">msg_type</a>: 3</td></tr>
+<tr class="separator:a7a27aaae39cc5f8128ccc6072bfa50b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0a6f786e6d39e70aa22d78ef0060c8" id="r_a1a0a6f786e6d39e70aa22d78ef0060c8"><td class="memItemLeft" ><a id="a1a0a6f786e6d39e70aa22d78ef0060c8" name="a1a0a6f786e6d39e70aa22d78ef0060c8"></a>
+union {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47cfff9ad79eb8650044c0732bbcff3d" id="r_a47cfff9ad79eb8650044c0732bbcff3d"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="structPACKED.html">measurement_report_t</a>&#160;&#160;&#160;<b>measurement_report</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a47cfff9ad79eb8650044c0732bbcff3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0a6f786e6d39e70aa22d78ef0060c8" id="r_a1a0a6f786e6d39e70aa22d78ef0060c8"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom">&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a1a0a6f786e6d39e70aa22d78ef0060c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Structure for the frame sent to the lorawan application. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a816ee9328edd81f6ab98950c86d4f0ea" name="a816ee9328edd81f6ab98950c86d4f0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a816ee9328edd81f6ab98950c86d4f0ea">&#9670;&#160;</a></span>altitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::altitude</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full altitude from the gps </p>
+
+</div>
+</div>
+<a id="a976d2fe9709bd5fd6f0f41c002225679" name="a976d2fe9709bd5fd6f0f41c002225679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976d2fe9709bd5fd6f0f41c002225679">&#9670;&#160;</a></span>blue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::blue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full blue data from the color sensor </p>
+
+</div>
+</div>
+<a id="a9cf172995ff43598cf028867ad25592b" name="a9cf172995ff43598cf028867ad25592b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cf172995ff43598cf028867ad25592b">&#9670;&#160;</a></span>clear</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::clear</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full clear data from the color sensor </p>
+
+</div>
+</div>
+<a id="af3c5b0b0a9adcec316791e04ea034fb9" name="af3c5b0b0a9adcec316791e04ea034fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c5b0b0a9adcec316791e04ea034fb9">&#9670;&#160;</a></span>green</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::green</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full green data from the color sensor </p>
+
+</div>
+</div>
+<a id="a76fb63f288b25d2f7595d19dfceb99f1" name="a76fb63f288b25d2f7595d19dfceb99f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76fb63f288b25d2f7595d19dfceb99f1">&#9670;&#160;</a></span>hum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::hum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>10b humidity as a percentage with 1 digit * 10 </p>
+
+</div>
+</div>
+<a id="aee34c7216eb3a890f9bee96975c31d02" name="aee34c7216eb3a890f9bee96975c31d02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee34c7216eb3a890f9bee96975c31d02">&#9670;&#160;</a></span>latitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t PACKED::latitude</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>4B full float latitude </p>
+
+</div>
+</div>
+<a id="a060972f3fd234b5061446c71e3eeddc6" name="a060972f3fd234b5061446c71e3eeddc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a060972f3fd234b5061446c71e3eeddc6">&#9670;&#160;</a></span>led_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t PACKED::led_state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Header 3b for the led status or unused in DownLink </p>
+
+</div>
+</div>
+<a id="a40de3a1019f29124ad6c7d947c4500da" name="a40de3a1019f29124ad6c7d947c4500da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40de3a1019f29124ad6c7d947c4500da">&#9670;&#160;</a></span>light</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::light</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>10b light as a percentage with 1 digit * 10 </p>
+
+</div>
+</div>
+<a id="a4b8f58628bc41e9545300f3de63f6a86" name="a4b8f58628bc41e9545300f3de63f6a86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8f58628bc41e9545300f3de63f6a86">&#9670;&#160;</a></span>longitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t PACKED::longitude</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>4B full float longitude </p>
+
+</div>
+</div>
+<a id="afb974eff4f0da339c5c934f07a900f93" name="afb974eff4f0da339c5c934f07a900f93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb974eff4f0da339c5c934f07a900f93">&#9670;&#160;</a></span>moisture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::moisture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>10b moisture as a percentage with 1 digit * 10 </p>
+
+</div>
+</div>
+<a id="a7a27aaae39cc5f8128ccc6072bfa50b4" name="a7a27aaae39cc5f8128ccc6072bfa50b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a27aaae39cc5f8128ccc6072bfa50b4">&#9670;&#160;</a></span>msg_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shared__data_8h.html#a76f51138d3051b734605c5bacc811dba">msg_type_t</a> PACKED::msg_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Header 3b For message type, used in both DL and UL </p>
+
+</div>
+</div>
+<a id="a019b2bd656c8ea61e0ba28df3c759d9b" name="a019b2bd656c8ea61e0ba28df3c759d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019b2bd656c8ea61e0ba28df3c759d9b">&#9670;&#160;</a></span>red</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t PACKED::red</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full red data from the color sensor </p>
+
+</div>
+</div>
+<a id="aaab4ae6ccbb0fb6431f2ed891148f74a" name="aaab4ae6ccbb0fb6431f2ed891148f74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab4ae6ccbb0fb6431f2ed891148f74a">&#9670;&#160;</a></span>temp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t PACKED::temp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>2B full temp data from the temperature sensor </p>
+
+</div>
+</div>
+<a id="aeff7ed521ea1bffc8e5320ccce9c5c15" name="aeff7ed521ea1bffc8e5320ccce9c5c15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff7ed521ea1bffc8e5320ccce9c5c15">&#9670;&#160;</a></span>version</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t PACKED::version</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Header 2b version, used in both DL and UL </p>
+
+</div>
+</div>
+<a id="ad58736de0ea72d0d469ec3a9f1b728e3" name="ad58736de0ea72d0d469ec3a9f1b728e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58736de0ea72d0d469ec3a9f1b728e3">&#9670;&#160;</a></span>x_acc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t PACKED::x_acc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>14b acceleration in the x axis from the sensor </p>
+
+</div>
+</div>
+<a id="af87cbbdc055a9a1102453499ebabbcbb" name="af87cbbdc055a9a1102453499ebabbcbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af87cbbdc055a9a1102453499ebabbcbb">&#9670;&#160;</a></span>y_acc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t PACKED::y_acc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>14b acceleration in the y axis from the sensor </p>
+
+</div>
+</div>
+<a id="a8a8c26b64f72b66a008cdafeb9e97adb" name="a8a8c26b64f72b66a008cdafeb9e97adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8c26b64f72b66a008cdafeb9e97adb">&#9670;&#160;</a></span>z_acc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t PACKED::z_acc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>14b acceleration in the z axis from the sensor </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>modules/shared_data/<a class="el" href="shared__data_8h_source.html">shared_data.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="structPACKED.html">PACKED</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
+</body>
+</html>
