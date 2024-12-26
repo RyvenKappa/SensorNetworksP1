@@ -6,7 +6,7 @@ This project aims to extend the functionalities of a previous designed system th
 
 ## _Previous project_
 
-This project is based on a solution developed using a DISCO-L072CZ-LRWAN1, with some sensors. More on that in [this repository](]https://github.com/RyvenKappa/EPCIoT_Final_Project).
+This project is based on a solution developed using a DISCO-L072CZ-LRWAN1, with some sensors. More on that in this repository: https://github.com/RyvenKappa/EPCIoT_Final_Project
 
 ## _Communication design_
 
