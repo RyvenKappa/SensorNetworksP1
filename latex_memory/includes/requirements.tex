@@ -1,0 +1,56 @@
+\section{REQUIREMENTS ANALYSIS}
+\subsection{Specifications required and implemented}
+
+This section presents in the next tables the list of requirements needed to implement, as well as the implementation status for each specification.
+\vspace{2\baselineskip}
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|p{0.1\textwidth} | p{0.7\textwidth} | p{0.15\textwidth}|}
+            \hline
+            \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
+            \hline
+            Phase2.1 & The target must be able to send the location. & Yes\\
+            \hline
+            Phase2.2 & The target must be able to send, apart from the location, 3 environmental parameters. & Yes\\
+            \hline
+            Phase2.3 & The dashboard must have a widget to represent the previous parameters values. & Yes\\
+            \hline
+            Phase2.4 & The dashboard must allow the user to send commands to change the RGB Led. The commands should be: ``OFF'', ``Green'' and ``Red''.  & Yes\\
+            \hline
+        \end{tabular} 
+    \end{center}
+    \caption{Phase 2 requirements implementation status}
+    \label{ReqGeneral}
+\end{table}
+
+\vspace{2\baselineskip}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|p{0.1\textwidth} | p{0.7\textwidth} | p{0.15\textwidth}|}
+            \hline
+            \textbf{Req. ID} & \textbf{Requirement description} & \textbf{Implemented}\\
+            \hline
+            Phase3.1 & Get all the parameters from the sensors. & Yes\\
+            \hline
+            Phase3.2 & Convert the data format of the system parameters from string to the most appropriate type to reduce their length. & Yes\\
+            \hline
+            Phase3.3 & Modify the LUA code to retrieve the values of all the parameters. & Yes\\
+            \hline
+        \end{tabular} 
+    \end{center}
+    \caption{Optional requirements implementation status}
+    \label{ReqTest}
+\end{table}
+
+\subsection{Extra specifications implemented}
+
+To further expand the communication capabilities of the system, a frame based communication was designed. To achieve this, 
+the communication was optimized for \texttt{30 Bytes}. This design is based around a header byte that allows for:
+\begin{itemize}
+    \item Frame version.
+    \item Control and data separation.
+    \item Scalability.
+\end{itemize}
+
+The design for this is described in \hyperref[advanced]{a dedicated chapter} of the document.
