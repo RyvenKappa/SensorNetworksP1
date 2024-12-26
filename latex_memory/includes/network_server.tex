@@ -103,14 +103,14 @@ predefined values to validate the functionality without the connection to the no
 When the previous data is obtained, the only function of the script (called \textit{parsePayload}) is called to parse the payload and set the specific node fields for the ``appeui'' and ```deveui''' parameters. This function follows the next structure:
 \begin{enumerate}
     \item The data is decoded as hexadecimal bytes.
-    \item The header is processed to obtain mainly the LEDState, to assign the specific node field.
+    \item The header is processed to obtain mainly the \texttt{LEDState}, to assign the specific node field.
     \item The GPS data such as the latitude, longitude and altitude is obtained using conversions to integers from \textit{LITTLE\_ENDIAN} byte arrays. No conversion is done.
     \item The color values for the Clear, Red, Green and blue components are obtained and assign. No conversions are done.
     \item The Temperature signed \texttt{16 bit} value is obtained and converted as the datasheet of the sensor specifies\cite{Support_Documents_TechnicalDocs_Si7021A20}:
     \[
     \text{Temperature} = \frac{175.72 \cdot \text{raw\_temp}}{65536.0} - 46.85
     \]
-    \item All the previous data was align to bytes, but the next data is align every \texttt{3 bytes}, and for each combination of these \texttt{3 bytes}, the lowest \texttt{10 bits} represent a percentage value, the highest \texttt{14 bits} is one axis of the accelerometer. This is done only for the 9 last bytes of the payload.
+    \item All the previous data was align to bytes, but the next data is align every \texttt{3 bytes}, and for each combination of these \texttt{3 bytes}, the lowest \texttt{10 bits} represent a percentage value, and the highest \texttt{14 bits} represent one of the accelerometer axis. This is done only for the 9 last bytes of the payload.
     \item The first \texttt{3 bytes} have the humidity(from 0 to 1000) and the X axis acceleration. The humidity is divided by 10.
     \item The second \texttt{3 bytes} have the light percentage(from 0 to 1000) and the Y axis acceleration. The light is divided by 10.
     \item The last \texttt{3 bytes} have the soil moisture percentage(from 0 to 10000) and the Z axis acceleration. The soil moisture is divided by 10.

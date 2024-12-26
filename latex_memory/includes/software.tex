@@ -96,8 +96,8 @@ All the data is sent as \textit{LITTLE ENDIAN}, and for each data the format was
     \item \textbf{Altitude}: For the altitude, an unsigned \texttt{16 bit} integer value is sent to represent the altitude in meters above the sea level. This is because the minimum for this project is around $700m$ above sea level (Madrid city).
     \item \textbf{RGB Values}: The RGB Values are sent as raw data from the sensor, as unsigned \texttt{16 bit} values. This is done for all the sensor values which are: clear, read, green and blue, that means \texttt{8 Bytes} for the color data.
     \item \textbf{Temperature}: The Temperature is still sent as raw data from the sensor, as a signed \texttt{16 bit} integer. This means that the processing to obtain the degrees value must be done in the network server.
-    \item \textbf{Humidity}: Up to this point, all the previous values where divisible by a whole \texttt{Byte}, but the message had already used 20 Bytes, and there was still the acceleration, humidity, light and soil moisture values that needed to be 
-    send in \texttt{9 Bytes}. To solve this, a encoding was defined for the humidity, light and moisture values to only use \texttt{10 bits}. This design is part of the problems found chapter.
+    \item \textbf{Humidity}: Up to this point, all the previous values where divisible by a whole \texttt{Byte}, but the message had already used \texttt{20 Bytes}, and there was still the acceleration, humidity, light and soil moisture values that needed to be 
+    send in \texttt{9 Bytes}. To solve this, a encoding was defined for the humidity, light and moisture values to only use \texttt{10 bits} on each. This design is part of the \hyperref[problems]{problems found chapter}.
     \item \textbf{X\_Acc}: The acceleration values are sent as they come from the sensor, transmitting the whole \texttt{14 bits} of each axis.
     \item \textbf{Light}: The percentage value is transmitted using the same encoding for the humidity and soil moisture values in \texttt{10 bits}.
     \item \textbf{Y\_Acc}: The Y-axis acceleration \texttt{14 bit} signed value.
